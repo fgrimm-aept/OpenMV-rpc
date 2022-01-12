@@ -127,8 +127,7 @@ def call_me(exposure):
                                          silent=False)  # 168740
         if img is not None:
             arr = np.array(list(img))
-            print(arr)
-            np.savetxt("Test.txt", arr, fmt="%.0d")
+            np.savetxt("Test.txt", arr=arr, fmt="%.0d")
             # print(img[-6], img[-5], img[-4], img[-3], img[-2], img[-1])
             # arr = np.frombuffer(img, dtype='uint16')
             # print(arr)
