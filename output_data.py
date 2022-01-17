@@ -5,7 +5,7 @@ import numpy as np
 
 # Gibt das numpy array als return value zurück
 def return_array():
-    arr = np.load('Test.npy')
+    arr = np.load('height1920_width1080_grayscale.npy')
     return arr
 
 
@@ -13,8 +13,3 @@ def return_array():
 np.set_printoptions(threshold=sys.maxsize, edgeitems=sys.maxsize)
 
 # Lade das von der Kamera gespeicherte Numpy array
-
-
-print(arr)
-# func call
-return_array(arr)
