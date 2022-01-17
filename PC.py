@@ -6,11 +6,13 @@
 
 # import io
 
-import numpy as np
-# import pygame
-import rpc
 import struct
 import sys
+
+import numpy as np
+from PIL import Image
+# import pygame
+import rpc
 
 # The RPC library above is installed on your OpenMV Cam and provides multiple classes for
 # allowing your OpenMV Cam to control over USB or WIFI.
@@ -126,27 +128,13 @@ def call_me(exposure):
         img = get_frame_buffer_call_back("sensor.GRAYSCALE", "sensor.QVGA", f"{exposure}", cutthrough=False,
                                          silent=False)  # 168740
         if img is not None:
-            arr = np.array(list(img))
-            np.savetxt("Test.txt", arr=arr, fmt="%.0d")
-            # print(img[-6], img[-5], img[-4], img[-3], img[-2], img[-1])
-            # arr = np.frombuffer(img, dtype='uint16')
-            # print(arr)
-            # np.savetxt("Test.txt", arr, fmt='%.0d')
 
-        #     try:
-        #         screen.blit(pygame.transform.scale(pygame.image.load(io.BytesIO(img), "jpg"),
-        #                                            (screen_w, screen_h)), (0, 0))
-        #         pygame.display.update()
-        #         clock.tick()
-        #     except pygame.error:
-        #         pass
-        #
-        # print(clock.get_fps())
-        #
-        # for event in pygame.event.get():
-        #     if event.type == pygame.QUIT:
-        #         pygame.quit()
-        #         quit()
+            arr = np.frombuffer(img, dtype=np.uint8)
+            height, width = 320, 240
+
+            img = Image.Image.putdata(arr)
+            img.show()
+            # np.save("Test", arr)
     return arr
 
 
