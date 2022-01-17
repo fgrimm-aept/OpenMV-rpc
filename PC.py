@@ -128,12 +128,14 @@ def call_me(exposure):
         img = get_frame_buffer_call_back("sensor.GRAYSCALE", "sensor.QVGA", f"{exposure}", cutthrough=False,
                                          silent=False)  # 168740
         if img is not None:
-
+            img = bytes(img)
             arr = np.frombuffer(img, dtype=np.uint8)
             height, width = 320, 240
+            pic = Image.frombytes(data=img, mode='L', size=(320, 240))
 
-            img = Image.Image.putdata(arr)
-            img.show()
+            # img = Image.Image.putdata(arr)
+            pic.show()
+            # img.show()
             # np.save("Test", arr)
     return arr
 
