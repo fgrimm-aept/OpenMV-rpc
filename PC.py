@@ -13,35 +13,11 @@ import time
 import numpy as np
 from PIL import Image
 
-# import pygame
 import rpc
 
-# The RPC library above is installed on your OpenMV Cam and provides multiple classes for
-# allowing your OpenMV Cam to control over USB or WIFI.
-
-##############################################################
-# Choose the interface you wish to control an OpenMV Cam over.
-##############################################################
-
-# Uncomment the below lines to setup your OpenMV Cam for controlling over a USB VCP.
-#
-# * port - Serial Port Name.
-#
 interface = rpc.rpc_usb_vcp_master(port="COM4")
 sys.stdout.flush()
 
-
-# Uncomment the below line to setup your OpenMV Cam for controlling over WiFi.
-#
-# * slave_ip - IP address to connect to.
-# * my_ip - IP address to bind to ("" to bind to all interfaces...)
-# * port - Port to route traffic to.
-#
-# interface = rpc.rpc_network_master(slave_ip="xxx.xxx.xxx.xxx", my_ip="", port=0x1DBA)
-
-##############################################################
-# Call Back Handlers
-##############################################################
 
 def get_frame_buffer_call_back(pixformat_str: str = 'sensor.GRAYSCALE', framesize_str: str = 'sensor.FHD',
                                exposure: str = "200_000", gain: str = "3", cutthrough: bool = False,
@@ -104,18 +80,6 @@ def get_frame_buffer_call_back(pixformat_str: str = 'sensor.GRAYSCALE', framesiz
             print("Failed to get Remote Frame!")
 
     return None
-
-
-#
-# pygame.init()
-# screen_w = 640
-# screen_h = 480
-# try:
-#     screen = pygame.display.set_mode((screen_w, screen_h), flags=pygame.RESIZABLE)
-# except TypeError:
-#     screen = pygame.display.set_mode((screen_w, screen_h))
-# pygame.display.set_caption("Frame Buffer")
-# clock = pygame.time.Clock()
 
 
 def call_me(exposure: int = 200_000, gain: int = 3, resolution: str = 'FHD', cutthrough: bool = True,
